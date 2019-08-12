@@ -280,37 +280,37 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
  #if defined(SWITCH)
 		svcOutputDebugString("starting",20);
 #endif
-#ifdef _DEBUG
-		SFileEnableDirectAccess(TRUE);
-#endif
+// #ifdef _DEBUG
+// 		SFileEnableDirectAccess(TRUE);
+// #endif
 		diablo_init_screen();		 
 		diablo_parse_flags(lpCmdLine);		 
 		init_create_window(nCmdShow);	 
 		sound_init();		 
 		UiInitialize();
 
-#ifdef _DEBUG
-		if (showintrodebug)
-#endif
-			play_movie("gendata\\logo.smk", TRUE);
+// #ifdef _DEBUG
+// 		if (showintrodebug)
+// #endif
+// 			play_movie("gendata\\logo.smk", TRUE);
 
-		{			
-			char szValueName[] = "Intro";
-			if (!SRegLoadValue("Diablo", szValueName, 0, &nData))
-				nData = 1;
-			if (nData)
-				play_movie("gendata\\diablo1.smk", TRUE);
-			SRegSaveValue("Diablo", szValueName, 0, 0);
-		}
+// 		{			
+// 			char szValueName[] = "Intro";
+// 			if (!SRegLoadValue("Diablo", szValueName, 0, &nData))
+// 				nData = 1;
+// 			if (nData)
+// 				play_movie("gendata\\diablo1.smk", TRUE);
+// 			SRegSaveValue("Diablo", szValueName, 0, 0);
+// 		}
 
-#ifdef _DEBUG
-		if (showintrodebug) {
-#endif
+// #ifdef _DEBUG
+// 		if (showintrodebug) {
+// #endif
 			UiTitleDialog(7);
 			BlackPalette();
-#ifdef _DEBUG
-		}
-#endif
+// #ifdef _DEBUG
+// 		}
+// #endif
 
 		mainmenu_loop();
 		UiDestroy();
@@ -494,7 +494,7 @@ void diablo_init_screen()
 
 BOOL diablo_find_window(LPCSTR lpClassName)
 {
-#ifndef SWITCH		
+#if !defined(SWITCH) && !defined(__vita__)
 	HWND result; // eax
 	HWND v2;     // esi
 	HWND v3;     // eax
@@ -519,7 +519,7 @@ BOOL diablo_find_window(LPCSTR lpClassName)
 
 void diablo_reload_process(HINSTANCE hInstance)
 {
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	DWORD dwSize, dwProcessId;
 	BOOL bNoExist;
 	char *s;
@@ -1036,7 +1036,7 @@ void diablo_hotkey_msg(DWORD dwMsg)
 		*s = '\0';
 	}
 
-	strcat(szFileName, "\\Diablo.ini");
+	strcat(szFileName, "ux0:app/DEVIL066/Diablo.ini");
 	/// ASSERT: assert(dwMsg < sizeof(spszMsgTbl) / sizeof(spszMsgTbl[0]));
 	GetPrivateProfileString("NetMsg", spszMsgKeyTbl[dwMsg], spszMsgTbl[dwMsg], szMsg, sizeof(szMsg), szFileName);
 	NetSendCmdString(-1, szMsg);

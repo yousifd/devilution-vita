@@ -4,7 +4,7 @@
 #include <exception>
 #include <system_error>
 #include <stdexcept>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 namespace dvl {
 namespace net {

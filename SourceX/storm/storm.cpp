@@ -2,9 +2,9 @@
 #include "miniwin/ddraw.h"
 #include "stubs.h"
 #include <Radon.hpp>
-#include <SDL.h>
-#include <SDL_endian.h>
-#include <SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_endian.h>
+#include <SDL2/SDL_mixer.h>
 #include <smacker.h>
 
 #include "DiabloUI/diabloui.h"
@@ -19,7 +19,7 @@ static std::string getIniPath()
 	char path[DVL_MAX_PATH];
 	int len = GetModuleFileNameA(ghInst, path, DVL_MAX_PATH);
 	path[len - 1] = '/';
-	strcat(path, "diablo.ini");
+	strcat(path, "ux0:app/DEVIL066/diablo.ini");
 
 	return path;
 }

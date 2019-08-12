@@ -7,6 +7,9 @@ template<typename T> inline T CLIP(T v, T amin, T amax)
 #ifdef SWITCH
 #define DISPLAY_WIDTH 1280
 #define DISPLAY_HEIGHT 720
+#elif __vita__
+#define DISPLAY_WIDTH 960
+#define DISPLAY_HEIGHT 544
 #else
 // TODO: How to find display size for each platform programmatically?
 #define DISPLAY_WIDTH 1920

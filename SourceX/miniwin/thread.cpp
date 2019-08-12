@@ -1,6 +1,6 @@
 #include "devilution.h"
 #include "stubs.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <set>
 
 namespace dvl {

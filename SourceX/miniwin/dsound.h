@@ -1,13 +1,13 @@
 #include "devilution.h"
 
-#include <SDL_mixer.h>
+#include <SDL2/SDL_mixer.h>
 
 namespace dvl {
 
 struct DirectSoundBuffer : public IDirectSoundBuffer {
 public:
         virtual ULONG Release();
-        BOOL GetStatus(LPDWORD pdwStatus);
+        HRESULT GetStatus(LPDWORD pdwStatus);
         HRESULT Lock(DWORD dwOffset, DWORD dwBytes, LPVOID *ppvAudioPtr1, LPDWORD pdwAudioBytes1,
             LPVOID *ppvAudioPtr2, LPDWORD pdwAudioBytes2, DWORD dwFlags);
         HRESULT Play(DWORD dwReserved1, DWORD dwPriority, DWORD dwFlags);

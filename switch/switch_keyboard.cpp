@@ -2,7 +2,7 @@
 #include <stdbool.h>
 
 #include <switch.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "switch_keyboard.h"
 
 static void switch_keyboard_get(char *guide_text, char *initial_text, int max_len, int multiline, char *buf)

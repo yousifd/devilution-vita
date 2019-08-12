@@ -1,12 +1,27 @@
 cmake_minimum_required(VERSION 3.7)
 
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+  if(DEFINED ENV{VITASDK})
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{VITASDK}/share/vita.toolchain.cmake" CACHE PATH "toolchain file")
+  else()
+    message(FATAL_ERROR "Please define VITASDK to point to your SDK path!")
+  endif()
+endif()
+
 include(CMake/out_of_tree.cmake)
 
-project(devilutionX
+project(devilution-vita
   VERSION 0.0.1
   LANGUAGES C CXX)
 
-list(APPEND CMAKE_MODULE_PATH "${devilutionX_SOURCE_DIR}/CMake")
+include("${VITASDK}/share/vita.cmake" REQUIRED)
+
+set(VITA_APP_NAME "Devilution Vita")
+set(VITA_TITLEID  "DEVIL0666")
+set(VITA_VERSION  "01.00")
+# set(CMAKE_GENERATOR_PLATFORM x64)
+
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Debug")
@@ -49,6 +64,10 @@ if(HAIKU)
   set(ASAN OFF)
 endif()
 
+if(VITA)
+  set(ASAN OFf)
+endif()
+
 if(DIST)
   set(sodium_USE_STATIC_LIBS ON)
 endif()
@@ -65,10 +84,12 @@ if(NOT CMAKE_SIZEOF_VOID_P EQUAL 4)
 endif()
 
 find_package(Threads REQUIRED)
-find_package(SDL2 REQUIRED)
-find_package(SDL2_ttf REQUIRED)
-find_package(SDL2_mixer REQUIRED)
-find_package(sodium REQUIRED)
+if(NOT VITA)
+  find_package(SDL2 REQUIRED)
+  find_package(SDL2_ttf REQUIRED)
+  find_package(SDL2_mixer REQUIRED)
+  find_package(sodium REQUIRED)
+endif()
 
 add_library(smacker STATIC
   3rdParty/libsmacker/smk_bitstream.c
@@ -151,8 +172,8 @@ add_library(devilution STATIC
   Source/path.cpp
   Source/pfile.cpp
   Source/player.cpp
-  Source/plrctrls.cpp
   Source/plrmsg.cpp
+  Source/plrctrls.cpp
   Source/portal.cpp
   Source/spelldat.cpp
   Source/quests.cpp
@@ -174,7 +195,7 @@ add_library(devilution STATIC
   Source/trigs.cpp
   Source/wave.cpp)
 
-add_executable(devilutionx
+add_executable(${PROJECT_NAME}
   SourceX/dx.cpp
   SourceX/miniwin/misc.cpp
   SourceX/miniwin/misc_io.cpp
@@ -205,27 +226,51 @@ add_executable(devilutionx
   SourceX/DiabloUI/selgame.cpp
   SourceX/DiabloUI/selhero.cpp
   SourceX/DiabloUI/title.cpp
-  SourceX/main.cpp
-  touch/touch.cpp)
+  touch/touch.cpp
+  SourceX/main.cpp)
 
 target_include_directories(devilution PUBLIC Source SourceS)
-target_include_directories(devilutionx PRIVATE
+target_include_directories(${PROJECT_NAME} PRIVATE
   SourceX
   3rdParty/asio/include
   3rdParty/Radon/Radon/include
   3rdParty/libsmacker)
 
 target_link_libraries(devilution PUBLIC Threads::Threads)
-target_link_libraries(devilutionx PRIVATE
+target_link_libraries(${PROJECT_NAME} PRIVATE
   devilution
   PKWare
   StormLib
   smacker
   Radon
-  SDL2::SDL2main
-  SDL2::SDL2_ttf
-  SDL2::SDL2_mixer
-  sodium)
+  # SDL2::SDL2main
+  # SDL2::SDL2_ttf
+  # SDL2::SDL2_mixer
+  # VITA
+  SDL2_ttf
+  SDL2_mixer
+  SDL2
+  freetype
+  FLAC
+  ogg
+  mikmod
+  mpg123
+  vorbisfile
+  vorbis
+  ogg
+  SceAudio_stub
+  vita2d
+  SceDisplay_stub
+  SceGxm_stub
+  SceSysmodule_stub
+  SceCommonDialog_stub
+  png
+  z
+  SceCtrl_stub
+  SceTouch_stub
+  SceHid_stub
+  )
+  # sodium)
 
 target_compile_definitions(devilution PRIVATE DEVILUTION_ENGINE)
 target_compile_definitions(devilution PUBLIC
@@ -233,7 +278,7 @@ target_compile_definitions(devilution PUBLIC
   "$<$<BOOL:${DEBUG}>:_DEBUG>"
   # Skip fades and other fluff
   "$<$<BOOL:${FASTER}>:FASTER>")
-target_compile_definitions(devilutionx PRIVATE ASIO_STANDALONE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE ASIO_STANDALONE)
 
 if(ASAN)
   target_compile_options(devilution PUBLIC -fsanitize=address -fsanitize-recover=address)
@@ -241,16 +286,16 @@ if(ASAN)
 endif()
 
 if(DIST)
-  target_link_libraries(devilutionx PUBLIC -static-libgcc -static-libstdc++)
+  target_link_libraries(${PROJECT_NAME} PUBLIC -static-libgcc -static-libstdc++)
 endif()
 
 if(WIN32)
-  target_link_libraries(devilutionx PRIVATE wsock32 ws2_32 wininet)
+  target_link_libraries(${PROJECT_NAME} PRIVATE wsock32 ws2_32 wininet)
   target_compile_options(devilution PUBLIC $<$<CONFIG:Debug>:-gstabs>)
 endif()
 
 if(HAIKU)
-  target_link_libraries(devilutionx PRIVATE network)
+  target_link_libraries(${PROJECT_NAME} PRIVATE network)
 endif()
 
 if(NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
@@ -264,8 +309,8 @@ if(NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   # Disable optimizations that can break non-standards-conforming code
   target_compile_options(devilution PRIVATE -fno-strict-aliasing)
 
-  # Warnings for devilutionX
-  target_compile_options(devilutionx PRIVATE -Wall -Wextra -Wno-write-strings -Wno-multichar -Wno-unused-parameter)
+  # Warnings for project
+  target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wno-write-strings -Wno-multichar -Wno-unused-parameter)
 endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
@@ -277,15 +322,28 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
 endif()
 
 target_compile_options(devilution PRIVATE -fsigned-char)
-target_compile_options(devilutionx PRIVATE -fsigned-char)
+target_compile_options(${PROJECT_NAME} PRIVATE -fsigned-char)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   # Style issues
-  target_compile_options(devilutionx PRIVATE -Wno-parentheses -Wno-logical-op-parentheses -Wno-bitwise-op-parentheses)
+  target_compile_options(${PROJECT_NAME} PRIVATE -Wno-parentheses -Wno-logical-op-parentheses -Wno-bitwise-op-parentheses)
   # Silence warnings about __int64 alignment hack not always being applicable
-  target_compile_options(devilutionx PRIVATE -Wno-ignored-attributes)
+  target_compile_options(${PROJECT_NAME} PRIVATE -Wno-ignored-attributes)
   # Fix: error: cast from pointer to smaller type 'unsigned char' loses information
   target_compile_options(devilution PRIVATE -fms-extensions -fms-compatibility -fms-compatibility-version=19.00)
 	# Silence appfat.cpp warnings
   set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wno-narrowing")
 endif()
+
+vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME})
+vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
+  VERSION ${VITA_VERSION}
+  NAME ${VITA_APP_NAME}
+  # FILE resources-vita/diabdat.mpq diabdat.mpq
+  # FILE resources-vita/diablo.ini diablo.ini
+  # FILE resources-vita/CharisSILB.ttf CharisSILB.ttf
+  # FILE sce_sys/icon0.png sce_sys/icon0.png
+  # FILE sce_sys/livearea/contents/bg.png sce_sys/livearea/contents/bg.png
+  # FILE sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png
+  # FILE sce_sys/livearea/contents/template.xml sce_sys/livearea/contents/template.xml
+)

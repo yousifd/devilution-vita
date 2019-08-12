@@ -1,7 +1,7 @@
 #include "devilution.h"
 #include "miniwin/dsound.h"
 #include "stubs.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 namespace dvl {
 

@@ -4,7 +4,7 @@
 #include <memory>
 #include <array>
 #include <cstring>
-#ifndef SWITCH
+#if !defined(SWITCH) && !defined(__vita__)
 #include <sodium.h>
 #endif
 

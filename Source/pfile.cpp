@@ -18,7 +18,7 @@ void pfile_init_save_directory()
 	DWORD len;
 	char Buffer[MAX_PATH];
 
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	len = GetWindowsDirectory(Buffer, sizeof(Buffer));
 	if (len) {
 		pfile_check_available_space(Buffer);
@@ -34,7 +34,7 @@ void pfile_init_save_directory()
 
 void pfile_check_available_space(char *pszDir)
 {
-#ifndef SWITCH		
+#if !defined(SWITCH) && !defined(__vita__)
 	char *s;
 	BOOL hasSpace;
 	DWORD TotalNumberOfClusters;
@@ -124,15 +124,15 @@ void pfile_get_save_path(char *pszBuf, DWORD dwBufSize, DWORD save_num)
 	char path[MAX_PATH];
 	const char *fmt = "\\multi_%d.sv";
 
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	if (gbMaxPlayers <= 1)
 		fmt = "\\single_%d.sv";
 #else
 		if (gbMaxPlayers <= 1)
-		fmt = "single_%d.sv";
+		fmt = "ux0:app/DEVIL0666/single_%d.sv";
 #endif	
 
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	// BUGFIX: ignores dwBufSize and uses MAX_PATH instead
 	plen = GetModuleFileName(ghInst, pszBuf, MAX_PATH);
 	s = strrchr(pszBuf, '\\');
@@ -310,7 +310,7 @@ char *GetSaveDirectory(char *dst, int dst_size, DWORD save_num)
 	char FileName[MAX_PATH];
 	const char *savename;
 
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	// BUGFIX: ignores dst_size and uses MAX_PATH instead
 	if (gbMaxPlayers > 1) {
 		savename = "\\dlinfo_%d.drv";

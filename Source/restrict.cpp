@@ -11,7 +11,7 @@ BOOL SystemSupported()
 
 BOOL RestrictedTest()
 {
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	FILE *f;
 	char Buffer[MAX_PATH];
 	BOOL ret = FALSE;

@@ -492,7 +492,7 @@ void MsgBox(const char *pszFmt, va_list va)
 
 void FreeDlg()
 {
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	if (terminating && cleanup_thread_id != GetCurrentThreadId())
 		Sleep(20000);
 
@@ -513,7 +513,7 @@ void FreeDlg()
 
 void __cdecl DrawDlg(char *pszFmt, ...)
 {
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	char text[256];
 	va_list arglist;
 

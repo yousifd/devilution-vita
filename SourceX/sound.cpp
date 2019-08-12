@@ -1,7 +1,7 @@
 #include "devilution.h"
 #include "stubs.h"
-#include <SDL.h>
-#include <SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 namespace dvl {
 
@@ -472,13 +472,13 @@ void music_start(int nTrack)
 	/// ASSERT: assert((DWORD) nTrack < NUM_MUSIC);
 	music_stop();
 	if (sglpDS && gbMusicOn) {
-#ifdef _DEBUG
-		SFileEnableDirectAccess(false);
-#endif
+// #ifdef _DEBUG
+// 		SFileEnableDirectAccess(false);
+// #endif
 		success = SFileOpenFile(sgszMusicTracks[nTrack], &sgpMusicTrack);
-#ifdef _DEBUG
-		SFileEnableDirectAccess(true);
-#endif
+// #ifdef _DEBUG
+// 		SFileEnableDirectAccess(true);
+// #endif
 		sound_create_primary_buffer(sgpMusicTrack);
 		if (!success) {
 			sgpMusicTrack = NULL;

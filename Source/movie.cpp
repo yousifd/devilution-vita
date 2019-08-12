@@ -14,7 +14,7 @@ void play_movie(char *pszMovie, BOOL user_can_close)
 	WNDPROC saveProc;
 	HANDLE video_stream;
 
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	if (!gbActive) {
 		return;
 	}

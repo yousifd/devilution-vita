@@ -1,7 +1,7 @@
 #include "devilution.h"
 #include "miniwin/ddraw.h"
 #include "stubs.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <string>
 
 #include "DiabloUI/diabloui.h"
@@ -118,7 +118,7 @@ WINBOOL FindClose(HANDLE hFindFile)
  */
 UINT GetWindowsDirectoryA(LPSTR lpBuffer, UINT uSize)
 {
-#ifndef SWITCH
+#if !defined(SWITCH) && !defined(__vita__)
 	char *name = SDL_GetPrefPath("diasurgical", "devilution");
 	strncpy(lpBuffer, name, uSize);
 	SDL_free(name);
@@ -148,7 +148,7 @@ WINBOOL GetDiskFreeSpaceA(LPCSTR lpRootPathName, LPDWORD lpSectorsPerCluster, LP
  */
 DWORD GetModuleFileNameA(HMODULE hModule, LPSTR lpFilename, DWORD nSize)
 {
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	char *name = SDL_GetPrefPath("diasurgical", "devilution");
 	strncpy(lpFilename, name, nSize);
 	SDL_free(name);
@@ -208,7 +208,7 @@ BOOL VerQueryValueA(LPCVOID pBlock, LPCSTR lpSubBlock, LPVOID *lplpBuffer, PUINT
 DWORD GetCurrentDirectory(DWORD nBufferLength, LPTSTR lpBuffer)
 {
 	
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	char *base_path = SDL_GetBasePath();
 	if (base_path == NULL) {
 		SDL_Log(SDL_GetError());
@@ -364,7 +364,7 @@ HWND CreateWindowExA(
 		flags |= SDL_WINDOW_INPUT_GRABBED;
 	}
 
-	window = SDL_CreateWindow(lpWindowName, 0, 0, 1920, 1080, 0);
+	window = SDL_CreateWindow(lpWindowName, 0, 0, 960, 544, 0);
 	if (window == NULL) {
 		SDL_Log(SDL_GetError());
 	}
@@ -730,7 +730,7 @@ DWORD GetPrivateProfileStringA(LPCSTR lpAppName, LPCSTR lpKeyName, LPCSTR lpDefa
 
 int MessageBoxA(HWND hWnd, const char *Text, const char *Title, UINT Flags)
 {
-#ifndef SWITCH	
+#if !defined(SWITCH) && !defined(__vita__)
 	Uint32 SDLFlags = 0;
 	if (Flags & DVL_MB_ICONHAND) {
 		SDLFlags |= SDL_MESSAGEBOX_ERROR;
