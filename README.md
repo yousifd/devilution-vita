@@ -1,15 +1,15 @@
-# Nintendo Switch Port of DevilutionX (Diablo)
+# Playstation Vita Port of DevilutionX (Diablo)
 
-![](https://i.imgur.com/DKVB198.png)
+<!-- ![](https://i.imgur.com/DKVB198.png) -->
 
-### How To Play:
+<!-- ### How To Play:
 - Extract contents of diablo-nx.zip release into SDMC:\switch\diablo-nx
 - Copy DIABDAT.MPQ from original Diablo game disc or GOG version.
 - Launch diablo-nx.nro
 - *Note:* Hold R on any installed game and launch it. Do not use photo-album to launch. If you use photo-album, the homebrew only has very little memory available, and the touch keyboard doesn't work. This is true for all homebrew, not just Diablo-NX.
-- Enjoy :)
+- Enjoy :) -->
 
-### Joycon Controls
+<!-- ### Joycon Controls
 
 - Left Analog : Move Hero
 - Right Analog : Simulate Mouse
@@ -41,9 +41,9 @@ There are lots of bugs. Check issues on the code repo.
 ### Compiling On Linux
 ```install devkitproA64, libzip, libpng, libjpeg, switch-freetype, switch-mesa, switch-glad, switch-glm, switch-sdl2, switch-sdl2_ttf, switch-sdl2_mixer, switch-libvorbis, switch-libmikmod```
 
-```make```
+```make``` -->
 
-### Compiling On Windows
+<!-- ### Compiling On Windows
 
 - Install [devkitpro](https://sourceforge.net/projects/devkitpro/)
 - Open ```Start Button > DevKitPro > MSys2```
@@ -59,7 +59,7 @@ There are lots of bugs. Check issues on the code repo.
 - ```dkp-pacman -S switch-freetype switch-mesa switch-glad switch-glm switch-sdl2 switch-sdl2_ttf switch-sdl2_mixer switch-libvorbis switch-libmikmod```
 - ```make```
 
-- .nro lives in release. Test with an emulator (RyuJinx) or real hardware.
+- .nro lives in release. Test with an emulator (RyuJinx) or real hardware. -->
 
 ### Credits
 - Reverse engineered by GalaXyHaXz in 2018
