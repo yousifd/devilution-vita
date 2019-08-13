@@ -2449,7 +2449,7 @@ int On_ENDSHIELD(TCmd *pCmd, int pnum)
 
 int On_CHEAT_EXPERIENCE(TCmd *pCmd, int pnum)
 {
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (gbBufferMsgs == 1)
 		msg_send_packet(pnum, pCmd, sizeof(*pCmd));
 	else if (plr[pnum]._pLevel < MAXCHARLEVEL - 1) {
@@ -2462,7 +2462,7 @@ int On_CHEAT_EXPERIENCE(TCmd *pCmd, int pnum)
 
 int On_CHEAT_SPELL_LEVEL(TCmd *pCmd, int pnum)
 {
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (gbBufferMsgs == 1)
 		msg_send_packet(pnum, pCmd, sizeof(*pCmd));
 	else

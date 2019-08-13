@@ -321,8 +321,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   target_compile_options(devilution PRIVATE -fno-aggressive-loop-optimizations)
 endif()
 
-target_compile_options(devilution PRIVATE -fsigned-char)
-target_compile_options(${PROJECT_NAME} PRIVATE -fsigned-char)
+target_compile_options(devilution PRIVATE -fsigned-char -g)
+target_compile_options(${PROJECT_NAME} PRIVATE -fsigned-char -g)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   # Style issues
@@ -340,6 +340,7 @@ vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
   VERSION ${VITA_VERSION}
   NAME ${VITA_APP_NAME}
   # FILE resources-vita/diabdat.mpq diabdat.mpq
+  # FILE resources-vita/patch_rt.mpq patch_rt.mpq
   # FILE resources-vita/diablo.ini diablo.ini
   # FILE resources-vita/CharisSILB.ttf CharisSILB.ttf
   # FILE sce_sys/icon0.png sce_sys/icon0.png

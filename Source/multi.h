@@ -15,7 +15,7 @@ extern char szPlayerName[128];
 extern BYTE gbDeltaSender; // weak
 extern int player_state[MAX_PLRS];
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 void __cdecl dumphist(const char *pszFmt, ...);
 #endif
 void multi_msg_add(BYTE *pbMsg, BYTE bLen);

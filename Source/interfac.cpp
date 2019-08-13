@@ -85,7 +85,7 @@ void ShowProgress(unsigned int uMsg)
 	DrawCutscene();
 	PaletteFadeIn(8);
 	IncProgress();
-	stream_update();
+	// stream_update();
 	IncProgress();
 
 	switch (uMsg) {

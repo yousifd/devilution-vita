@@ -21,7 +21,7 @@ void UiMainMenuSelect(int value)
 
 void mainmenu_Esc()
 {
-#ifdef SWITCH || __vita__
+#if defined(SWITCH) || defined(__vita__)
 	return;
 #else
 	UiMainMenuSelect(MAINMENU_EXIT_DIABLO);

@@ -105,7 +105,7 @@ extern "C" {
 #endif
 
 #if defined(_MSC_VER) && !defined(STORMLIB_NO_AUTO_LINK)
-  #ifdef _DEBUG                                 // DEBUG VERSIONS
+  #ifdef __DEBUG                                 // DEBUG VERSIONS
     #ifndef _UNICODE                            
       #ifdef _DLL                               
         #pragma comment(lib, "StormLibDAD.lib") // Debug Ansi CRT-DLL version

@@ -2049,7 +2049,7 @@ void M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 		return;
 
 	hper = random(98, 100);
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (debug_mode_dollar_sign || debug_mode_key_inverted_v)
 		hper = 1000;
 #endif

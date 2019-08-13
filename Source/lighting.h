@@ -24,7 +24,7 @@ void DoVision(int nXPos, int nYPos, int nRadius, BOOL doautomap, BOOL visible);
 void FreeLightTable();
 void InitLightTable();
 void MakeLightTable();
-#ifdef _DEBUG
+#ifdef __DEBUG
 void ToggleLighting_2();
 void ToggleLighting();
 #endif

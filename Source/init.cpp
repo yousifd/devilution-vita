@@ -11,7 +11,7 @@ _SNETVERSIONDATA fileinfo;
 int gbActive; // weak
 char diablo_exe_path[MAX_PATH];
 HANDLE unused_mpq;
-char patch_rt_mpq_path[MAX_PATH];
+char patch_rt_mpq_path[MAX_PATH] = "ux0:app/DEVIL0666/";
 WNDPROC CurrentProc;
 HANDLE diabdat_mpq;
 char diabdat_mpq_path[MAX_PATH] = "ux0:app/DEVIL0666/";

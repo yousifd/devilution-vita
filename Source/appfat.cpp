@@ -20,7 +20,7 @@ int cleanup_thread_id;
 
 void TriggerBreak()
 {
-#ifdef _DEBUG
+#ifdef __DEBUG
 	LPTOP_LEVEL_EXCEPTION_FILTER pFilter;
 
 	pFilter = SetUnhandledExceptionFilter(BreakFilter);
@@ -35,7 +35,7 @@ void TriggerBreak()
 #endif
 }
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 LONG __stdcall BreakFilter(PEXCEPTION_POINTERS pExc)
 {
 	if(pExc->ExceptionRecord == NULL) {
@@ -463,7 +463,7 @@ void __cdecl app_fatal(const char *pszFmt, ...)
 #endif
 	va_start(va, pszFmt);
 	FreeDlg();
-#ifdef _DEBUG
+#ifdef __DEBUG
 	TriggerBreak();
 #endif
 
@@ -483,6 +483,8 @@ void MsgBox(const char *pszFmt, va_list va)
 	wvsprintf(Text, pszFmt, va);
 #ifdef SWITCH	
 	svcOutputDebugString(Text, 256);
+#elif defined(__vita__)
+
 #else		
 	if (ghMainWnd)
 		SetWindowPos(ghMainWnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE);
@@ -524,7 +526,7 @@ void __cdecl DrawDlg(char *pszFmt, ...)
 #endif	
 }
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 void assert_fail(int nLineNo, const char *pszFile, const char *pszFail)
 {
 	app_fatal("assertion failed (%d:%s)\n%s", nLineNo, pszFile, pszFail);

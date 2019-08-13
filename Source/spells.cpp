@@ -60,14 +60,14 @@ void UseMana(int id, int sn)
 	if (id == myplr) {
 		switch (plr[id]._pSplType) {
 		case RSPLTYPE_SPELL:
-#ifdef _DEBUG
+#ifdef __DEBUG
 			if (!debug_mode_key_inverted_v) {
 #endif
 				ma = GetManaAmount(id, sn);
 				plr[id]._pMana -= ma;
 				plr[id]._pManaBase -= ma;
 				drawmanaflag = TRUE;
-#ifdef _DEBUG
+#ifdef __DEBUG
 			}
 #endif
 			break;
@@ -85,7 +85,7 @@ BOOL CheckSpell(int id, int sn, BYTE st, BOOL manaonly)
 {
 	BOOL result;
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (debug_mode_key_inverted_v)
 		return TRUE;
 #endif

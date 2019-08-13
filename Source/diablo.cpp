@@ -42,7 +42,7 @@ int color_cycle_timer; // weak
 /* rdata */
 
 BOOL fullscreen = TRUE;
-#ifdef _DEBUG
+#ifdef __DEBUG
 int showintrodebug = 1;
 int questdebug = -1;
 int debug_mode_key_s;
@@ -103,8 +103,8 @@ BOOL StartGame(BOOL bNewGame, BOOL bSinglePlayer)
 		} 
 		byte_678640 = 0;
 
-		if (bNewGame || !gbValidSaveFile) {			 
-			InitLevels();			 
+		if (bNewGame || !gbValidSaveFile) {
+			InitLevels();
 			InitQuests();			 
 			InitPortals();			 
 			InitDungMsgs(myplr);
@@ -113,7 +113,7 @@ BOOL StartGame(BOOL bNewGame, BOOL bSinglePlayer)
 			uMsg = WM_DIABNEWGAME;
 		else
 			uMsg = WM_DIABLOADGAME;
-		 
+		
 		run_game_loop(uMsg);	
 		NetClose();
 	
@@ -280,7 +280,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
  #if defined(SWITCH)
 		svcOutputDebugString("starting",20);
 #endif
-// #ifdef _DEBUG
+// #ifdef __DEBUG
 // 		SFileEnableDirectAccess(TRUE);
 // #endif
 		diablo_init_screen();		 
@@ -289,7 +289,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		sound_init();		 
 		UiInitialize();
 
-// #ifdef _DEBUG
+// #ifdef __DEBUG
 // 		if (showintrodebug)
 // #endif
 // 			play_movie("gendata\\logo.smk", TRUE);
@@ -303,12 +303,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 // 			SRegSaveValue("Diablo", szValueName, 0, 0);
 // 		}
 
-// #ifdef _DEBUG
+// #ifdef __DEBUG
 // 		if (showintrodebug) {
 // #endif
-			UiTitleDialog(7);
-			BlackPalette();
-// #ifdef _DEBUG
+			// UiTitleDialog(7);
+			// BlackPalette();
+// #ifdef __DEBUG
 // 		}
 // #endif
 
@@ -325,7 +325,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 void diablo_parse_flags(char *args)
 {
 	char c;
-#ifdef _DEBUG
+#ifdef __DEBUG
 	int i;
 #endif
 
@@ -345,7 +345,7 @@ void diablo_parse_flags(char *args)
 		} else {
 			c = tolower(*args);
 			args++;
-#ifdef _DEBUG
+#ifdef __DEBUG
 			switch(c) {
 			case '^':
 				debug_mode_key_inverted_v = 1;
@@ -1036,7 +1036,7 @@ void diablo_hotkey_msg(DWORD dwMsg)
 		*s = '\0';
 	}
 
-	strcat(szFileName, "ux0:app/DEVIL066/Diablo.ini");
+	strcat(szFileName, "ux0:app/DEVIL0666/Diablo.ini");
 	/// ASSERT: assert(dwMsg < sizeof(spszMsgTbl) / sizeof(spszMsgTbl[0]));
 	GetPrivateProfileString("NetMsg", spszMsgKeyTbl[dwMsg], spszMsgTbl[dwMsg], szMsg, sizeof(szMsg), szFileName);
 	NetSendCmdString(-1, szMsg);
@@ -1137,11 +1137,11 @@ void PressKey(int vkey)
 			doom_close();
 		}
 	}
-#ifdef _DEBUG
+#ifdef __DEBUG
 	else if(vkey == VK_F2) {
 	}
 #endif
-#ifdef _DEBUG
+#ifdef __DEBUG
 	else if(vkey == VK_F3) {
 		if(pcursitem != -1) {
 			sprintf(
@@ -1156,7 +1156,7 @@ void PressKey(int vkey)
 		NetSendCmdString(1 << myplr, tempstr);
 	}
 #endif
-#ifdef _DEBUG
+#ifdef __DEBUG
 	else if(vkey == VK_F4) {
 		PrintDebugQuest();
 	}
@@ -1494,7 +1494,7 @@ void PressChar(int vkey)
 		return;
 	case '*':
 	case '8':
-#ifdef _DEBUG
+#ifdef __DEBUG
 		if(debug_mode_key_inverted_v || debug_mode_key_w) {
 			NetSendCmd(TRUE, CMD_CHEAT_EXPERIENCE);
 			return;
@@ -1504,7 +1504,7 @@ void PressChar(int vkey)
 			UseInvItem(myplr, 54);
 		}
 		return;
-#ifdef _DEBUG
+#ifdef __DEBUG
 	case ')':
 	case '0':
 		if(debug_mode_key_inverted_v) {
@@ -1903,7 +1903,7 @@ void LoadGameLevel(BOOL firstflag, int lvldir)
 		ProcessVisionList();
 	}
 
-	music_start(leveltype);
+	// music_start(leveltype);
 
 	while (!IncProgress())
 		;
@@ -1968,7 +1968,7 @@ void game_logic()
 		ProcessMissiles();
 	}
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if(debug_mode_key_inverted_v && GetAsyncKeyState(VK_SHIFT) & 0x8000) {
 		ScrollView();
 	}

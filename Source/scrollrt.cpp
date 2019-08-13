@@ -2117,7 +2117,7 @@ void ClearScreenBuffer()
 	unlock_buf(3);
 }
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 void ScrollView()
 {
 	BOOL scroll;
@@ -2441,12 +2441,12 @@ void DrawMain(int dwHgt, BOOL draw_desc, BOOL draw_hp, BOOL draw_mana, BOOL draw
 		}
 	}
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 	DrawFPS();
 #endif
 }
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 void DrawFPS()
 {
 	DWORD tc, frames;

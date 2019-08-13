@@ -11,7 +11,7 @@ int sgdwLockCount;
 BYTE *gpBuffer;
 IDirectDrawSurface *lpDDSBackBuf;
 IDirectDrawSurface *lpDDSPrimary;
-#ifdef _DEBUG
+#ifdef __DEBUG
 int locktbl[256];
 #endif
 #ifdef __cplusplus
@@ -200,7 +200,7 @@ HRESULT dx_DirectDrawCreate(LPGUID guid, LPDIRECTDRAW *lplpDD, LPUNKNOWN pUnkOut
 
 void lock_buf(BYTE idx)
 {
-#ifdef _DEBUG
+#ifdef __DEBUG
 	++locktbl[idx];
 #endif
 	lock_buf_priv();
@@ -247,7 +247,7 @@ void lock_buf_priv()
 
 void unlock_buf(BYTE idx)
 {
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (!locktbl[idx])
 		app_fatal("Draw lock underflow: 0x%x", idx);
 	--locktbl[idx];

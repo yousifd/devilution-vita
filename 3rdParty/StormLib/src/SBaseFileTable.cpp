@@ -97,7 +97,7 @@ void GetBits(
     // Keep compiler happy for platforms where nResultByteSize is not used
     nResultByteSize = nResultByteSize;
 
-#ifdef _DEBUG
+#ifdef __DEBUG
     // Check if the target is properly zeroed
     for(int i = 0; i < nResultByteSize; i++)
         assert(pbBuffer[i] == 0);

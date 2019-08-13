@@ -472,11 +472,11 @@ void music_start(int nTrack)
 	/// ASSERT: assert((DWORD) nTrack < NUM_MUSIC);
 	music_stop();
 	if (sglpDS && gbMusicOn) {
-// #ifdef _DEBUG
+// #ifdef __DEBUG
 // 		SFileEnableDirectAccess(false);
 // #endif
 		success = SFileOpenFile(sgszMusicTracks[nTrack], &sgpMusicTrack);
-// #ifdef _DEBUG
+// #ifdef __DEBUG
 // 		SFileEnableDirectAccess(true);
 // #endif
 		sound_create_primary_buffer(sgpMusicTrack);

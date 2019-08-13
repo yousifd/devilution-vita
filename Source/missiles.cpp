@@ -522,7 +522,7 @@ BOOL MonsterTrapHit(int m, int mindam, int maxdam, int dist, int t, BOOLEAN shif
 			if (CheckMonsterHit(m, &rv)) {
 				ret = rv;
 			} else {
-#ifdef _DEBUG
+#ifdef __DEBUG
 				if (hit >= hper && !debug_mode_dollar_sign && !debug_mode_key_inverted_v && monster[m]._mmode != MM_STONE) {
 					ret = FALSE;
 				}
@@ -539,7 +539,7 @@ BOOL MonsterTrapHit(int m, int mindam, int maxdam, int dist, int t, BOOLEAN shif
 						monster[m]._mhitpoints -= dam >> 2;
 					else
 						monster[m]._mhitpoints -= dam;
-#ifdef _DEBUG
+#ifdef __DEBUG
 					if (debug_mode_dollar_sign || debug_mode_key_inverted_v)
 						monster[m]._mhitpoints = 0;
 #endif
@@ -626,7 +626,7 @@ BOOL MonsterMHit(int pnum, int m, int mindam, int maxdam, int dist, int t, BOOLE
 		hit = 0;
 	if (CheckMonsterHit(m, &ret))
 		return ret;
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (hit >= hper && !debug_mode_key_inverted_v && !debug_mode_dollar_sign)
 		return 0;
 #else
@@ -702,7 +702,7 @@ BOOL PlayerMHit(int pnum, int m, int dist, int mind, int maxd, int mtype, BOOLEA
 	}
 
 	hit = random(72, 100);
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (debug_mode_dollar_sign || debug_mode_key_inverted_v)
 		hit = 1000;
 #endif

@@ -883,13 +883,13 @@ void CreatePlrItems(int p)
 		SetPlrHandItem(&plr[p].InvBody[INVLOC_HAND_RIGHT], IDI_WARRSHLD);
 		GetPlrHandSeed(&plr[p].InvBody[INVLOC_HAND_RIGHT]);
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 		if (!debug_mode_key_w) {
 #endif
 			SetPlrHandItem(&plr[p].HoldItem, IDI_WARRCLUB);
 			GetPlrHandSeed(&plr[p].HoldItem);
 			AutoPlace(p, 0, 1, 3, TRUE);
-#ifdef _DEBUG
+#ifdef __DEBUG
 		}
 #endif
 
@@ -924,7 +924,7 @@ void CreatePlrItems(int p)
 	SetPlrHandItem(&plr[p].HoldItem, IDI_GOLD);
 	GetPlrHandSeed(&plr[p].HoldItem);
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (!debug_mode_key_w) {
 #endif
 		plr[p].HoldItem._ivalue = 100;
@@ -932,7 +932,7 @@ void CreatePlrItems(int p)
 		plr[p]._pGold = plr[p].HoldItem._ivalue;
 		plr[p].InvList[plr[p]._pNumInv++] = plr[p].HoldItem;
 		plr[p].InvGrid[30] = plr[p]._pNumInv;
-#ifdef _DEBUG
+#ifdef __DEBUG
 	} else {
 		plr[p].HoldItem._ivalue = GOLD_MAX_LIMIT;
 		plr[p].HoldItem._iCurs = ICURS_GOLD_LARGE;

@@ -2,7 +2,7 @@
 
 DEVILUTION_BEGIN_NAMESPACE
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 BOOL update_seed_check = FALSE;
 #endif
 
@@ -25,7 +25,7 @@ void FreeDebugGFX()
 	MemFreeDbg(pSquareCel);
 }
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 void init_seed_desync()
 {
 	int i;
@@ -94,7 +94,7 @@ void CheckDungeonClear()
 	}
 }
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 void GiveGoldCheat()
 {
 	int i, ni;

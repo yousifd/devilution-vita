@@ -7,7 +7,7 @@ extern int terminating;       // weak
 extern int cleanup_thread_id; // weak
 
 void TriggerBreak();
-#ifdef _DEBUG
+#ifdef __DEBUG
 LONG __stdcall BreakFilter(PEXCEPTION_POINTERS pExc);
 #endif
 char *GetErrorStr(DWORD error_code);
@@ -18,7 +18,7 @@ void __cdecl app_fatal(const char *pszFmt, ...);
 void MsgBox(const char *pszFmt, va_list va);
 void FreeDlg();
 void __cdecl DrawDlg(char *pszFmt, ...);
-#ifdef _DEBUG
+#ifdef __DEBUG
 void assert_fail(int nLineNo, const char *pszFile, const char *pszFail);
 #endif
 void DDErrMsg(DWORD error_code, int log_line_nr, char *log_file_path);

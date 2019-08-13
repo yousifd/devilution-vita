@@ -5,7 +5,7 @@
 DEVILUTION_BEGIN_NAMESPACE
 
 BOOLEAN gbSomebodyWonGameKludge; // weak
-#ifdef _DEBUG
+#ifdef __DEBUG
 DWORD gdwHistTicks;
 #endif
 TBuffer sgHiPriBuf;
@@ -38,39 +38,39 @@ const int event_types[3] = {
 	EVENT_TYPE_PLAYER_MESSAGE
 };
 
-#ifdef _DEBUG
-void __cdecl dumphist(const char *pszFmt, ...)
-{
-	static FILE *sgpHistFile = NULL;
-	DWORD dwTicks;
-	va_list va;
+// #ifdef __DEBUG
+// void __cdecl dumphist(const char *pszFmt, ...)
+// {
+// 	static FILE *sgpHistFile = NULL;
+// 	DWORD dwTicks;
+// 	va_list va;
 
-	va_start(va, pszFmt);
+// 	va_start(va, pszFmt);
 
-	if (sgpHistFile == NULL) {
-		sgpHistFile = fopen("c:\\dumphist.txt", "wb");
-		if (sgpHistFile == NULL) {
-			return;
-		}
-	}
+// 	if (sgpHistFile == NULL) {
+// 		sgpHistFile = fopen("c:\\dumphist.txt", "wb");
+// 		if (sgpHistFile == NULL) {
+// 			return;
+// 		}
+// 	}
 
-	dwTicks = GetTickCount();
-	fprintf(sgpHistFile, "%4u.%02u  ", (dwTicks - gdwHistTicks) / 1000, (dwTicks - gdwHistTicks) % 1000 / 10);
-	vfprintf(sgpHistFile, pszFmt, va);
-	fprintf(
-	    sgpHistFile,
-	    "\r\n          (%d,%d)(%d,%d)(%d,%d)(%d,%d)\r\n",
-	    plr[0].plractive,
-	    player_state[0],
-	    plr[1].plractive,
-	    player_state[1],
-	    plr[2].plractive,
-	    player_state[2],
-	    plr[3].plractive,
-	    player_state[3]);
-	fflush(sgpHistFile);
-}
-#endif
+// 	dwTicks = GetTickCount();
+// 	fprintf(sgpHistFile, "%4u.%02u  ", (dwTicks - gdwHistTicks) / 1000, (dwTicks - gdwHistTicks) % 1000 / 10);
+// 	vfprintf(sgpHistFile, pszFmt, va);
+// 	fprintf(
+// 	    sgpHistFile,
+// 	    "\r\n          (%d,%d)(%d,%d)(%d,%d)(%d,%d)\r\n",
+// 	    plr[0].plractive,
+// 	    player_state[0],
+// 	    plr[1].plractive,
+// 	    player_state[1],
+// 	    plr[2].plractive,
+// 	    player_state[2],
+// 	    plr[3].plractive,
+// 	    player_state[3]);
+// 	fflush(sgpHistFile);
+// }
+// #endif
 
 void multi_msg_add(BYTE *pbMsg, BYTE bLen)
 {
@@ -372,7 +372,7 @@ void multi_begin_timeout()
 	if(!sgbTimeout) {
 		return;
 	}
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if(debug_mode_key_i) {
 		return;
 	}
@@ -412,15 +412,15 @@ void multi_begin_timeout()
 	/// ASSERT: assert(nLowestActive != -1);
 	/// ASSERT: assert(nLowestPlayer != -1);
 
-#ifdef _DEBUG
-	dumphist(
-		"(%d) grp:%d ngrp:%d lowp:%d lowa:%d",
-		myplr,
-		bGroupPlayers,
-		bGroupCount,
-		nLowestPlayer,
-		nLowestActive);
-#endif
+// #ifdef __DEBUG
+// 	dumphist(
+// 		"(%d) grp:%d ngrp:%d lowp:%d lowa:%d",
+// 		myplr,
+// 		bGroupPlayers,
+// 		bGroupCount,
+// 		nLowestPlayer,
+// 		nLowestActive);
+// #endif
 
 	if(bGroupPlayers < bGroupCount) {
 		gbGameDestroyed = TRUE;
@@ -709,10 +709,10 @@ BOOL NetInit(BOOL bSinglePlayer, BOOL *pfExitProgram)
 			if (!multi_init_multi(&ProgramData, &plrdata, &UiData, pfExitProgram))
 				return FALSE;
 		}
-#ifdef _DEBUG
-		gdwHistTicks = GetTickCount();
-		dumphist("(%d) new game started", myplr);
-#endif
+// #ifdef __DEBUG
+// 		gdwHistTicks = GetTickCount();
+// 		dumphist("(%d) new game started", myplr);
+// #endif
 		sgbNetInited = TRUE;
 		sgbTimeout = FALSE;
 		delta_init();
@@ -792,7 +792,7 @@ void SetupLocalCoords()
 	}
 	x = 75;
 	y = 68;
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (debug_mode_key_inverted_v || debug_mode_key_d) {
 		x = 49;
 		y = 23;
@@ -925,9 +925,9 @@ void recv_plrinfo(int pnum, TCmdPlrInfoHdr *p, BOOL recv)
 	UnPackPlayer(&netplr[pnum], pnum, 1);
 
 	if (!recv) {
-#ifdef _DEBUG
-		dumphist("(%d) received all %d plrinfo", myplr, pnum);
-#endif
+// #ifdef __DEBUG
+// 		dumphist("(%d) received all %d plrinfo", myplr, pnum);
+// #endif
 		return;
 	}
 
@@ -957,9 +957,9 @@ void recv_plrinfo(int pnum, TCmdPlrInfoHdr *p, BOOL recv)
 			dFlags[plr[pnum].WorldX][plr[pnum].WorldY] |= BFLAG_DEAD_PLAYER;
 		}
 	}
-#ifdef _DEBUG
-	dumphist("(%d) making %d active -- recv_plrinfo", myplr, pnum);
-#endif
+// #ifdef __DEBUG
+// 	dumphist("(%d) making %d active -- recv_plrinfo", myplr, pnum);
+// #endif
 }
 
 DEVILUTION_END_NAMESPACE

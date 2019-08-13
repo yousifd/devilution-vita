@@ -69,12 +69,12 @@ DEVILUTION_BEGIN_NAMESPACE
 
 // If defined, don't reload for debuggers [Default -> Undefined]
 // Note that with patch 1.03 the command line was hosed, this is required to pass arguments to the game
-#ifdef _DEBUG
+#ifdef __DEBUG
 #define DEBUGGER
 #endif
 
 // If defined, don't fry the CPU [Default -> Undefined]
-#ifdef _DEBUG
+#ifdef __DEBUG
 #define SLEEPFIX
 #endif
 

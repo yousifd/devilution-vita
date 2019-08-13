@@ -608,7 +608,7 @@ void TalkToTowner(int p, int t)
 
 	dx = abs(plr[p].WorldX - towner[t]._tx);
 	dy = abs(plr[p].WorldY - towner[t]._ty);
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if(!debug_mode_key_d && (dx >= 2 || dy >= 2)) {
 		return;
 	}

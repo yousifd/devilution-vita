@@ -19,7 +19,7 @@ static std::string getIniPath()
 	char path[DVL_MAX_PATH];
 	int len = GetModuleFileNameA(ghInst, path, DVL_MAX_PATH);
 	path[len - 1] = '/';
-	strcat(path, "ux0:app/DEVIL066/diablo.ini");
+	strcat(path, "ux0:app/DEVIL0666/diablo.ini");
 
 	return path;
 }

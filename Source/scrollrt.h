@@ -36,7 +36,7 @@ void DrawObject(int x, int y, int ox, int oy, BOOL pre, int CelSkip, int capChun
 void scrollrt_draw_e_flag(BYTE *pBuff, int x, int y, int capChunks, int CelCap, int sx, int sy);
 void DrawZoom(int x, int y);
 void ClearScreenBuffer();
-#ifdef _DEBUG
+#ifdef __DEBUG
 void ScrollView();
 void EnableFrameCount();
 #endif
@@ -44,7 +44,7 @@ void scrollrt_draw_game_screen(BOOL draw_cursor);
 void scrollrt_draw_cursor_back_buffer();
 void scrollrt_draw_cursor_item();
 void DrawMain(int dwHgt, BOOL draw_desc, BOOL draw_hp, BOOL draw_mana, BOOL draw_sbar, BOOL draw_btn);
-#ifdef _DEBUG
+#ifdef __DEBUG
 void DrawFPS();
 #endif
 void DoBlitScreen(DWORD dwX, DWORD dwY, DWORD dwWdt, DWORD dwHgt);

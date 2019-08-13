@@ -113,7 +113,7 @@ void InitQuests()
 		quests[QuestGroup3[random(0, sizeof(QuestGroup3) / sizeof(int))]]._qactive = 0;
 		quests[QuestGroup4[random(0, sizeof(QuestGroup4) / sizeof(int))]]._qactive = 0;
 	}
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (questdebug != -1)
 		quests[questdebug]._qactive = 2;
 #endif

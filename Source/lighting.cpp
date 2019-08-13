@@ -943,7 +943,7 @@ void MakeLightTable()
 	}
 }
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 void ToggleLighting_2()
 {
 	int i;

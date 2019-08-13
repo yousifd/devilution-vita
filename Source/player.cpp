@@ -890,7 +890,7 @@ void InitPlayer(int pnum, BOOL FirstTime)
 		plr[pnum]._pAblSpells = 1 << (SPL_RECHARGE - 1);
 	}
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (debug_mode_dollar_sign && FirstTime) {
 		plr[pnum]._pMemSpells |= 1 << (SPL_TELEPORT - 1);
 		if (!plr[myplr]._pSplLvl[SPL_TELEPORT]) {
@@ -2349,7 +2349,7 @@ BOOL PlrHitMonst(int pnum, int m)
 	if (CheckMonsterHit(m, &ret)) {
 		return ret;
 	}
-#ifdef _DEBUG
+#ifdef __DEBUG
 	if (hit < hper || debug_mode_key_inverted_v || debug_mode_dollar_sign) {
 #else
 	if (hit < hper) {
@@ -2451,7 +2451,7 @@ BOOL PlrHitMonst(int pnum, int m)
 		if (plr[pnum]._pIFlags & ISPL_NOHEALPLR) {
 			monster[m]._mFlags |= MFLAG_NOHEAL;
 		}
-#ifdef _DEBUG
+#ifdef __DEBUG
 		if (debug_mode_dollar_sign || debug_mode_key_inverted_v) {
 			monster[m]._mhitpoints = 0; /* double check */
 		}
