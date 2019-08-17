@@ -5,6 +5,11 @@
 #include "../3rdParty/Storm/Source/storm.h"
 #include "../DiabloUI/diabloui.h"
 
+// #include <debugnet.h>
+
+// #define ip_server "192.168.1.3" // TODO: Change to my IP
+// #define port_server 18194
+
 DEVILUTION_BEGIN_NAMESPACE
 
 HWND ghMainWnd;
@@ -283,25 +288,25 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 // #ifdef __DEBUG
 // 		SFileEnableDirectAccess(TRUE);
 // #endif
-		diablo_init_screen();		 
-		diablo_parse_flags(lpCmdLine);		 
+		diablo_init_screen();
+		diablo_parse_flags(lpCmdLine);
 		init_create_window(nCmdShow);	 
-		sound_init();		 
+		sound_init();
 		UiInitialize();
 
 // #ifdef __DEBUG
 // 		if (showintrodebug)
 // #endif
-// 			play_movie("gendata\\logo.smk", TRUE);
+		// 	play_movie("gendata\\logo.smk", TRUE);
 
-// 		{			
-// 			char szValueName[] = "Intro";
-// 			if (!SRegLoadValue("Diablo", szValueName, 0, &nData))
-// 				nData = 1;
-// 			if (nData)
-// 				play_movie("gendata\\diablo1.smk", TRUE);
-// 			SRegSaveValue("Diablo", szValueName, 0, 0);
-// 		}
+		// {			
+		// 	char szValueName[] = "Intro";
+		// 	if (!SRegLoadValue("Diablo", szValueName, 0, &nData))
+		// 		nData = 1;
+		// 	if (nData)
+		// 		play_movie("gendata\\diablo1.smk", TRUE);
+		// 	SRegSaveValue("Diablo", szValueName, 0, 0);
+		// }
 
 // #ifdef __DEBUG
 // 		if (showintrodebug) {
@@ -1036,7 +1041,7 @@ void diablo_hotkey_msg(DWORD dwMsg)
 		*s = '\0';
 	}
 
-	strcat(szFileName, "ux0:app/DEVIL0666/Diablo.ini");
+	strcat(szFileName, "ux0:data/devilution/Diablo.ini");
 	/// ASSERT: assert(dwMsg < sizeof(spszMsgTbl) / sizeof(spszMsgTbl[0]));
 	GetPrivateProfileString("NetMsg", spszMsgKeyTbl[dwMsg], spszMsgTbl[dwMsg], szMsg, sizeof(szMsg), szFileName);
 	NetSendCmdString(-1, szMsg);

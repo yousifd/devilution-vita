@@ -19,7 +19,6 @@ include("${VITASDK}/share/vita.cmake" REQUIRED)
 set(VITA_APP_NAME "Devilution Vita")
 set(VITA_TITLEID  "DEVIL0666")
 set(VITA_VERSION  "01.00")
-# set(CMAKE_GENERATOR_PLATFORM x64)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
 
@@ -33,6 +32,7 @@ option(DIST "Dynamically link only glibc and SDL2" OFF)
 option(FASTER "Enable FASTER in engine" ON)
 option(BINARY_RELEASE "Enable options for binary release" OFF)
 option(NIGHTLY_BUILD "Enable options for nightly build" OFF)
+option(DEBUG "Enable debugging" ON)
 
 if(BINARY_RELEASE)
   set(CMAKE_BUILD_TYPE "Release")
@@ -70,6 +70,10 @@ endif()
 
 if(DIST)
   set(sodium_USE_STATIC_LIBS ON)
+endif()
+
+if(DEBUG)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 endif()
 
 set(CMAKE_CXX_STANDARD 14)
@@ -243,10 +247,12 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   StormLib
   smacker
   Radon
+  sodium
   # SDL2::SDL2main
   # SDL2::SDL2_ttf
   # SDL2::SDL2_mixer
   # VITA
+  debugnet
   SDL2_ttf
   SDL2_mixer
   SDL2
@@ -270,7 +276,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   SceTouch_stub
   SceHid_stub
   )
-  # sodium)
 
 target_compile_definitions(devilution PRIVATE DEVILUTION_ENGINE)
 target_compile_definitions(devilution PUBLIC
@@ -339,10 +344,6 @@ vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME})
 vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
   VERSION ${VITA_VERSION}
   NAME ${VITA_APP_NAME}
-  # FILE resources-vita/diabdat.mpq diabdat.mpq
-  # FILE resources-vita/patch_rt.mpq patch_rt.mpq
-  # FILE resources-vita/diablo.ini diablo.ini
-  # FILE resources-vita/CharisSILB.ttf CharisSILB.ttf
   # FILE sce_sys/icon0.png sce_sys/icon0.png
   # FILE sce_sys/livearea/contents/bg.png sce_sys/livearea/contents/bg.png
   # FILE sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png

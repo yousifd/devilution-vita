@@ -11,10 +11,10 @@ _SNETVERSIONDATA fileinfo;
 int gbActive; // weak
 char diablo_exe_path[MAX_PATH];
 HANDLE unused_mpq;
-char patch_rt_mpq_path[MAX_PATH] = "ux0:app/DEVIL0666/";
+char patch_rt_mpq_path[MAX_PATH] = "ux0:data/devilution/";
 WNDPROC CurrentProc;
 HANDLE diabdat_mpq;
-char diabdat_mpq_path[MAX_PATH] = "ux0:app/DEVIL0666/";
+char diabdat_mpq_path[MAX_PATH] = "ux0:data/devilution/";
 HANDLE patch_rt_mpq;
 BOOL killed_mom_parent; // weak
 BOOLEAN screensaver_enabled_prev;

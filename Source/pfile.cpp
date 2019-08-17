@@ -122,14 +122,14 @@ void pfile_get_save_path(char *pszBuf, DWORD dwBufSize, DWORD save_num)
 	DWORD plen;
 	char *s;
 	char path[MAX_PATH];
-	const char *fmt = "ux0:app/DEVIL0666/multi_%d.sv";
+	const char *fmt = "ux0:data/devilution/multi_%d.sv";
 
 #if !defined(SWITCH) && !defined(__vita__)
 	if (gbMaxPlayers <= 1)
 		fmt = "\\single_%d.sv";
 #else
 		if (gbMaxPlayers <= 1)
-		fmt = "ux0:app/DEVIL0666/single_%d.sv";
+		fmt = "ux0:data/devilution/single_%d.sv";
 #endif	
 
 #if !defined(SWITCH) && !defined(__vita__)
